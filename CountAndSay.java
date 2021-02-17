@@ -1,7 +1,3 @@
-package com.leetcode;
-
-import sun.tools.jconsole.Tab;
-
 import java.util.HashMap;
 import java.util.Map;
 

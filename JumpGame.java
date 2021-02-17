@@ -1,5 +1,3 @@
-package com.leetcode;
-
 /**
  * Creator:CharlesChaing
  * Date: 9/13/2019 AD
@@ -23,6 +21,6 @@ package com.leetcode;
  */
 public class JumpGame {
     public boolean canJump(int[] nums) {
-
+        return false;
     }
 }
