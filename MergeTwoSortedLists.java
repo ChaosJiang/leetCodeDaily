@@ -1,5 +1,3 @@
-package com.leetcode;
-
 /**
  * Project Name: leetcode
  * Package Name: leetcode

@@ -1,5 +1,3 @@
-package com.leetcode;
-
 import java.util.Arrays;
 
 /**
@@ -10,7 +8,7 @@ import java.util.Arrays;
  * Date: 2019-05-18
  * Description:16. 3Sum Closest
  */
-public class ThreeSumClosest {
+public class No16_ThreeSumClosest {
     /**
      * Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest
      * to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
