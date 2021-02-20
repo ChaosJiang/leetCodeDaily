@@ -1,5 +1,3 @@
-package com.leetcode;
-
 import java.util.HashMap;
 
 /**
@@ -10,7 +8,7 @@ import java.util.HashMap;
  * Date: 2019-05-21
  * Description:19. Remove Nth Node From End of List
  */
-public class RemoveNthNodeFromEndOfList {
+public class No19_RemoveNthNodeFromEndOfList {
     /**
      * Given a linked list, remove the n-th node from the end of list and return its head.
      * <p>
@@ -37,7 +35,7 @@ public class RemoveNthNodeFromEndOfList {
     }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (n < 0) {
+        if (n < 1) {
             return head;
         }
         HashMap<Integer, ListNode> listMap = new HashMap<>();
@@ -61,9 +59,9 @@ public class RemoveNthNodeFromEndOfList {
     }
 
     public ListNode removeNthFromEnd2(ListNode head, int n) {
-        ListNode start = new ListNode(0);
-        ListNode slow = start, fast = start;
-        slow.next = head;
+        ListNode prev = new ListNode(0);
+        prev.next = head;
+        ListNode slow = prev, fast = prev;
 
         for (int i = 1; i <= n + 1; i++) {
             fast = fast.next;
@@ -75,7 +73,6 @@ public class RemoveNthNodeFromEndOfList {
         }
 
         slow.next = slow.next.next;
-        return start.next;
-
+        return prev.next;
     }
 }
