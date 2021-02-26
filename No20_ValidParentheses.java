@@ -11,7 +11,7 @@ import java.util.Stack;
  * Date: 2019-05-21
  * Description:20. Valid Parentheses
  */
-public class ValidParentheses {
+public class No20_ValidParentheses {
     /**
      * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
      * <p>
@@ -59,6 +59,26 @@ public class ValidParentheses {
             }
         }
 
+        return stack.empty();
+    }
+
+    public boolean isValid2(String s) {
+        Stack<Character> stack = new Stack<>();
+        char roundBracketStart = '(', roundBracketEnd = ')';
+        char curlyBracketStart = '{', curlyBracketEnd = '}';
+        char squareBracketStart = '[', squareBracketEnd = ']';
+
+        for (char ch: s.toCharArray()) {
+            if (!stack.empty()) {
+                if ((ch == roundBracketEnd && stack.peek() == roundBracketStart)
+                        || (ch == curlyBracketEnd && stack.peek() == curlyBracketStart)
+                        || (ch == squareBracketEnd && stack.peek() == squareBracketStart)) {
+                    stack.pop();
+                    continue;
+                }
+            }
+            stack.push(ch);
+        }
         return stack.empty();
     }
 }
