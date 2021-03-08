@@ -4,7 +4,7 @@
  * Created by Chiangsir.
  * Date: AD 2021/02/20
  */
-public class NO21_MergeTwoLists {
+public class No21_MergeTwoLists {
     /**
      * Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
      * <p>
