@@ -17,9 +17,10 @@ public class InsertionSort {
         for (int i =1; i < n; i++) {
             int value = a[i];
             int j = i -1;
-            // 最小值前面的数组元素向后移动
+
             for (; j >= 0; j--) {
                 if(a[j] > value) {
+                    //元素向后移动
                     a[j+1] = a[j];
                 } else {
                     break;
