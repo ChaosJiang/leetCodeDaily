@@ -4,7 +4,7 @@
  * Created by Chiangsir.
  * Date: AD 2021/03/11
  */
-public class QuickSort {
+public class  QuickSort {
     /**
      * @param a
      * @param n 快速排序
