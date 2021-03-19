@@ -20,13 +20,13 @@ public class No215_KthLargestElementInAnArray {
      * Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
      * Output: 4
      */
-    Random random = new Random();
+    static Random random = new Random();
 
-    public int findKthLargest(int[] nums, int k) {
+    public static int quickSort(int[] nums, int k) {
         return quickSort(nums, 0, nums.length - 1, nums.length - k);
     }
 
-    public int quickSort(int[] a, int lo, int hi, int k) {
+    public static int quickSort(int[] a, int lo, int hi, int k) {
         int pivot = randomPartition(a, lo, hi);
         if (k == pivot) {
             return a[k];
@@ -35,29 +35,35 @@ public class No215_KthLargestElementInAnArray {
         }
     }
 
-    public int randomPartition(int[] a, int lo, int hi) {
+    public static int randomPartition(int[] a, int lo, int hi) {
         int i = random.nextInt(hi - lo + 1) + lo;
         swap(a, i, hi);
         return partition(a, lo, hi);
     }
 
-    public int partition(int[] a, int lo, int hi) {
+    public static int partition(int[] a, int lo, int hi) {
         // take number at right side of array as pivot
         int x = a[hi];
-        int i = lo - 1;
+        int i = lo;
         for (int j = lo; j < hi; j++) {
-            if (a[j] <= x) {
-                swap(a, ++i, j);
+            if (a[j] < x) {
+                // when i equals j, do not swap
+                if(i != j) swap(a, i, j);
+                i++;
             }
         }
-        swap(a, i + 1, hi);
-        return i + 1;
+        swap(a, i , hi);
+        return i;
     }
 
-    public void swap(int[] a, int i, int j) {
+    public static void swap(int[] a, int i, int j) {
         int tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
     }
 
+    public static void main(String[] args) {
+        int[] nums = {3,2,1,5,6,4};
+        System.out.println(quickSort(nums, 2));
+    }
 }
