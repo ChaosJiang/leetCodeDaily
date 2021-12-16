@@ -13,7 +13,6 @@ public class No529_Minesweeper {
         // Unrevealed MIne
         if(board[row][col] == 'M') {
             board[row][col] = 'X';
-
         } else {
             dfs(board, row, col);
         }
