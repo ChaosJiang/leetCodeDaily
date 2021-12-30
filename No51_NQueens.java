@@ -1,6 +1,3 @@
-package com.leetcode;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -32,7 +29,7 @@ import java.util.*;
  * ]
  * Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
  */
-public class NQueens {
+public class No51_NQueens {
     public static List<List<String>> solveNQueens(int n) {
 
         List<List<String>> result = new ArrayList<>(n);
@@ -68,6 +65,65 @@ public class NQueens {
                 }
             }
         }
+    }
+
+    public List<List<String>> solveNQueens2(int n) {
+        // solution list
+        List<List<String>> solutions = new ArrayList<List<String>>();
+        // record
+        Set<Integer> columns = new HashSet<Integer>();
+        Set<Integer> diagonals1 = new HashSet<Integer>();
+        Set<Integer> diagonals2 = new HashSet<Integer>();
+        // init
+        int[] queens = new int[n];
+        Arrays.fill(queens, -1);
+        // 回溯法
+        backTrack(solutions, queens, n, 0, columns, diagonals1, diagonals2);
+        return solutions;
+    }
+
+    public void backTrack(List<List<String>> solutions, int[] queens, int n, int row, Set<Integer> columns,
+                              Set<Integer> diagonals1, Set<Integer> diagonals2) {
+        if(n == row) {
+            solutions.add(generateCheese(queens, n));
+        } else {
+            for (int i = 0; i < n; i++) {
+                if(columns.contains(i)) {
+                    continue;
+                }
+                int diagonal1 = row - i;
+                if(diagonals1.contains(diagonal1)) {
+                    continue;
+                }
+                int diagonal2 = row + i;
+                if(diagonals2.contains(diagonal2)) {
+                    continue;
+                }
+                queens[row] = i;
+                columns.add(i);
+                diagonals1.add(diagonal1);
+                diagonals2.add(diagonal2);
+
+                backTrack(solutions, queens, n, row + 1, columns, diagonals1, diagonals2);
+                queens[row] = -1;
+                columns.remove(i);
+                diagonals1.remove(diagonal1);
+                diagonals2.remove(diagonal2);
+            }
+        }
+
+    }
+
+    // Generate full solution from an array of column indices.
+    public List<String> generateCheese(int[] queens, int n) {
+        List<String> solution = new ArrayList<>();
+        for (int i = 0; i < n ; i++) {
+            char[] row = new char[n];
+            Arrays.fill(row, '.');
+            row[queens[i]] = 'Q';
+            solution.add(new String(row));
+        }
+        return solution;
     }
 
     public static void main(String[] args) {
