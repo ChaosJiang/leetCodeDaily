@@ -20,15 +20,19 @@ class Solution:
     def reveal(
         self, board: list[list[str]], i: int, j: int, row_count: int, col_count: int
     ) -> None:
-        count = self.adjacent_mines_count(board, i, j, row_count, col_count)
-        if count == 0:
-            board[i][j] = "B"
-            for x in range(max(0, i - 1), min(i + 2, row_count)):
-                for y in range(max(0, j - 1), min(j + 2, col_count)):
-                    if board[x][y] == "E":  # Only process unrevealed cells
-                        self.reveal(board, x, y, row_count, col_count)
-        else:
-            board[i][j] = str(count)
+        queue = [(i, j)]
+        while queue:
+            x, y = queue.pop(0)
+            count = self.adjacent_mines_count(board, x, y, row_count, col_count)
+            if count == 0:
+                board[x][y] = "B"
+                for nx in range(max(0, x - 1), min(x + 2, row_count)):
+                    for ny in range(max(0, y - 1), min(y + 2, col_count)):
+                        if board[nx][ny] == "E":  # Only process unrevealed cells
+                            board[nx][ny] = "B"  # Mark as visited
+                            queue.append((nx, ny))
+            else:
+                board[x][y] = str(count)
 
     def adjacent_mines_count(
         self, board: list[list[str]], row: int, col: int, row_count: int, col_count: int
@@ -52,7 +56,15 @@ if __name__ == "__main__":
         ["E", "E", "E", "E", "E"],
     ]
     click_1 = [3, 0]
-    print(solution.updateBoard(board_1, click_1))
+    result_1 = solution.updateBoard(board_1, click_1)
+    assert result_1 == [
+        ["B", "1", "E", "1", "B"],
+        ["B", "1", "M", "1", "B"],
+        ["B", "1", "1", "1", "B"],
+        ["B", "B", "B", "B", "B"],
+    ]
+    print(result_1)
+
     # Test case 2
     board_2 = [
         ["B", "1", "E", "1", "B"],
@@ -61,4 +73,12 @@ if __name__ == "__main__":
         ["B", "B", "B", "B", "B"],
     ]
     click_2 = [1, 2]
-    print(solution.updateBoard(board_2, click_2))
+    # Expected output: The mine at [1, 2] is clicked, so it should be converted to "X".
+    result_2 = solution.updateBoard(board_2, click_2)
+    assert result_2 == [
+        ["B", "1", "E", "1", "B"],
+        ["B", "1", "X", "1", "B"],
+        ["B", "1", "1", "1", "B"],
+        ["B", "B", "B", "B", "B"],
+    ]
+    print(result_2)
